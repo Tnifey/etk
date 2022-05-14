@@ -11,15 +11,18 @@ can output multiple files, pass multiple -o arguments.
 
 ### Installation
 
-add this repo to package.json 
+add this repo to package.json
 ```
 {
     "devDependencies": {
-        "etk": "github:Tnifey/etk#main"
+        "etk": "github:Tnifey/etk#main",  // latest
+        "etk": "github:Tnifey/etk#v0.1.1" // tag version (production ready)
     }
 }
 ```
 and run `yarn` to install this dependency
+
+[checkout tags](https://github.com/Tnifey/etk/tags) for versions
 
 ### Usage
 
