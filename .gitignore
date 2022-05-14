@@ -199,3 +199,4 @@ Temporary Items
 
 resources/
 .translations.json
+.translations.*

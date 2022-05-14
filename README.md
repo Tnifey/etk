@@ -13,9 +13,9 @@ can output multiple files, pass multiple -o arguments.
 
 run as command:
 ```sh
-npx etk -o output.json path-as-glob/**/*.(handlebars|js|ts)
-npx etk path-as-glob/**/*.(handlebars|js|ts)
-npx etk path/to/file.js path/to/file.handlebars
+npx etk -o output.json "path-as-glob/**/*.(handlebars|js|ts)"
+npx etk -o output.py "path-as-glob/**/*.(handlebars|js|ts)"
+npx etk -o output.po "path-as-glob/**/*.(handlebars|js|ts)"
 ```
 
 in package.json as script:
@@ -29,7 +29,6 @@ in package.json as script:
     }
 }
 ```
-
 
 ### Internally using:
 
