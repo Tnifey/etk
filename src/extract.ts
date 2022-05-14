@@ -21,8 +21,15 @@ export async function extract(config): Promise<ExtractResult> {
 
     for await (const output of outputs) {
         const type = path.extname(output).slice(1);
-        console.log("Writing to file:", output);
-        await fs.writeFile(output, await serialize(type, translations));
+        console.log("Serialization of type:", type);
+        const content = await serialize(
+            type,
+            translations,
+            config?.serializers,
+        );
+
+        console.log("Writing translation keys to file:", output);
+        await fs.writeFile(output, content);
     }
 
     return {

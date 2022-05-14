@@ -1,0 +1,56 @@
+{
+    // glob as input
+    input: "test/**/*.(js|ts|handlebars)",
+    // output files
+    output: [
+        ".translations.json",
+        ".translations.po",
+        ".translations.py"
+    ],
+    // parser options
+    parsers: {
+        // parser options
+        handlebars: {
+            // extensions to parse with handlebars parser
+            extensions: [
+                "handlebars",
+                "hbs"
+            ]
+        },
+        javascript: {
+            // extensions to parse with javascript parser
+            extensions: [
+                "js",
+                "ts",
+                "jsx",
+                "tsx"
+            ],
+            // use this function names as search patterns
+            func: [
+                "gettext"
+            ]
+        }
+    },
+    serializers: {
+        json: {
+            empty: false,
+            minify: false,
+            spaces: 4,
+        },
+        py: {
+            empty: false,
+            header: "from django.utils.translation import gettext_lazy as _\n\n",
+            prefix: "_(",
+            suffix: ")\n\n",
+        },
+        po: {
+            namespace: "frontend",
+            context: "frontend",
+            charset: "utf8",
+            header: {
+                "content-type": "text/plain; charset=utf8",
+                "plural-forms": "nplurals=2; plural=(n!=1);",
+            }
+        }
+    }
+}

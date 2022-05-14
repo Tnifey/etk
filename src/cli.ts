@@ -8,12 +8,12 @@ import { extract, ExtractResult } from "./extract";
 import { stripIndents } from "common-tags";
 import JSON5 from "json5";
 
+console.log(`etk -- extract translations keys\n\n`);
+
 let argv = minimist(process.argv.slice(2));
 
 if (argv.help || argv.h) {
     const message = `
-etk -- extract translations keys
-
 Usage:
   $ etk [options] [files-to-extract]
 
@@ -53,6 +53,7 @@ let config = {
     },
 };
 
+// config file is more important
 if (argv?.c && typeof argv?.c === "string") {
     const configFilepath = path.relative(process.cwd(), argv.c);
 
@@ -81,13 +82,17 @@ if (config?.silent) {
 }
 
 if (!config.input.length) {
-    console.error("No files specified");
-    process.exit(1);
+    success({
+        count: 0,
+        inputs: [],
+        outputs: [],
+        translations: {},
+    });
+    process.exit(0);
 }
 
 if (!config.output.length) {
-    console.error("No outputs specified");
-    process.exit(1);
+    error("No output files specified");
 }
 
 const message = stripIndents`
@@ -97,12 +102,15 @@ const message = stripIndents`
 console.log(message, "\n");
 
 function success(translations: ExtractResult) {
+    const fileList =
+        translations?.outputs?.length > 0
+            ? `\n- ${translations.outputs.join("\n- ")}`
+            : "";
     const message = stripIndents`
         Successfully extracted ${translations.count} translations.
         Checked ${translations.inputs.length} files.
         Outputs to ${translations.outputs.length} files.
-
-        - ${translations.outputs.join("\n- ")}
+        ${fileList}
     `;
     console.log(message, "\n");
     process.exit(0);

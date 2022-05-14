@@ -6,9 +6,18 @@ import type { ITranslations } from "./types";
  */
 export async function jsonSerialize(
     translations: ITranslations,
-    minify = false,
+    options?: Record<string, any>,
 ): Promise<string> {
-    return JSON.stringify(translations, null, minify ? null : 2);
+    const removeEmpty = options?.removeEmpty ?? true;
+    if (removeEmpty && "" in translations) {
+        delete translations[""];
+    }
+
+    return JSON.stringify(
+        translations,
+        null,
+        options?.minify ? null : options?.spaces || 4,
+    );
 }
 
 /**
@@ -16,14 +25,24 @@ export async function jsonSerialize(
  */
 export async function pySerialize(
     translations: ITranslations,
-    pragma = `from django.utils.translation import gettext_lazy as _\n\n`,
+    options?: Record<string, any>,
 ): Promise<string> {
+    const removeEmpty = options?.removeEmpty ?? true;
+    if (removeEmpty && "" in translations) {
+        delete translations[""];
+    }
+
+    let pragma =
+        options?.pragma ??
+        `from django.utils.translation import gettext_lazy as _\n\n`;
     let output = `${pragma}\n`;
+    let prefix = options?.prefix ?? "_(";
+    let suffix = options?.suffix ?? ")\n\n";
 
     const entries = Object.entries(translations);
 
     for (let [key] of entries) {
-        output += `_(${JSON.stringify(key)})\n\n`;
+        output += `${prefix}${JSON.stringify(key)}${suffix}`;
     }
 
     return output;
@@ -34,9 +53,23 @@ export async function pySerialize(
  */
 export async function poSerialize(
     translations: ITranslations,
+    options?: Record<string, any>,
 ): Promise<string> {
+    const namespace = options?.namespace ?? "";
+    const removeEmpty = options?.removeEmpty ?? true;
+    if (removeEmpty && "" in translations) {
+        delete translations[""];
+    }
+
     function poentry([msgid, msgstr]) {
-        return [msgid, { msgid: msgid, msgstr: msgstr }];
+        return [
+            msgid,
+            {
+                msgid: msgid,
+                msgstr: msgstr,
+                msgctxt: options?.context ?? undefined,
+            },
+        ];
     }
 
     function povalues(content) {
@@ -45,21 +78,17 @@ export async function poSerialize(
         return Object.fromEntries(map);
     }
 
+    const charset = options?.charset ?? "utf-8";
+    const headers = options?.headers ?? {
+        "content-type": `text/plain; charset=${charset}`,
+        "plural-forms": "nplurals=2; plural=(n!=1);",
+    };
+
     let output = {
-        charset: "utf-8",
-        headers: {
-            "content-type": "text/plain; charset=utf-8",
-            "plural-forms": "nplurals=2; plural=(n!=1);",
-        },
+        charset,
+        headers,
         translations: {
-            "": {
-                "": {
-                    msgid: "",
-                    msgstr: [
-                        "Content-Type: text/plain; charset=utf-8\n",
-                        "Plural-Forms: nplurals=2; plural=(n!=1);\n\n",
-                    ],
-                },
+            [namespace]: {
                 ...povalues(translations),
             },
         },
@@ -74,15 +103,16 @@ export async function poSerialize(
 export async function serialize(
     type: string,
     content: ITranslations,
+    options?: Record<string, any>,
 ): Promise<string> {
     switch (type) {
         case "po":
-            return poSerialize(content);
+            return poSerialize(content, options?.[type]);
 
         case "py":
-            return pySerialize(content);
+            return pySerialize(content, options?.[type]);
 
         default:
-            return jsonSerialize(content);
+            return jsonSerialize(content, options?.[type]);
     }
 }

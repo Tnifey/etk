@@ -1,0 +1,6 @@
+test/
+dist/
+resources/
+build/
+.translations.*
+example.etkrc
