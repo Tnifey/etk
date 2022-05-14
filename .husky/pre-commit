@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+git checkout HEAD -- ./dist/cli.js
+
 npx lint-staged
 
 (npx git-branch-is --not -r "^feat/" && yarn run build && cp ./build/cli.js dist/cli.js && git add dist/cli.js && git commit --amend --no-edit --no-verify) || true
