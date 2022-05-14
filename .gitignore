@@ -90,7 +90,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -202,3 +201,5 @@ resources/
 .translations.*
 
 !.gitkeep
+
+build/
