@@ -12,11 +12,12 @@
         "extract-translations": "node extract -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
         "prepare": "husky install",
         "format": "prettier --write \"src/**/*\"",
-        "lint:prettier": "prettier --check --ignore-unknown --write"
+        "lint:prettier": "prettier --check --ignore-unknown --write",
+        "build": "npx esbuild src/bin/cli.js --bundle --outdir=dist --minify --minify-whitespace --target=node16 --platform=node"
     },
-    "main": "./src/index.js",
+    "main": "./dist/cli.js",
     "bin": {
-        "etk": "./src/bin/extract.js"
+        "etk": "./dist/cli.js"
     },
     "dependencies": {
         "fast-glob": "^3.2.11",
@@ -27,6 +28,9 @@
     },
     "devDependencies": {
         "@types/node": "^17.0.33",
+        "esbuild": "^0.14.39",
+        "esno": "^0.15.0",
+        "git-branch-is": "^4.0.0",
         "husky": "^8.0.1",
         "prettier": "^2.6.2"
     }
