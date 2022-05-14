@@ -2,14 +2,19 @@
 import glob from "fast-glob";
 import path from "path";
 
-export function getFilePaths(argv) {
-    const files = argv._ || [];
+export function getFilePaths(filepaths, options?): string[] {
+    const files =
+        typeof filepaths === "string"
+            ? [filepaths]
+            : Array.isArray(filepaths)
+            ? filepaths
+            : [];
 
-    if (files?.length === 1) {
+    if (files?.length === 1 && (options?.noGlob ?? true)) {
         return glob.sync(files?.[0], { dot: true });
     }
 
-    return Array.isArray(files) ? files : [];
+    return files.map((filepath) => path.relative(process.cwd(), filepath));
 }
 
 export function ensureString(str): string {

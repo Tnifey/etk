@@ -9,12 +9,12 @@
     },
     "readme": "README.md",
     "scripts": {
-        "dev": "esno src/bin/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
-        "start": "esno src/bin/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
+        "dev": "esno src/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
+        "start": "esno src/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
         "prepare": "husky install",
         "format": "prettier --write \"src/**/*\"",
         "lint:prettier": "prettier --check --ignore-unknown --write",
-        "build": "npx esbuild ./src/bin/cli.ts --bundle --outdir=build --minify --minify-whitespace --target=node16 --platform=node"
+        "build": "npx esbuild ./src/cli.ts --bundle --outdir=build --minify --minify-whitespace --target=node16 --platform=node"
     },
     "main": "./dist/cli.js",
     "bin": {
@@ -29,10 +29,12 @@
     },
     "devDependencies": {
         "@types/node": "^17.0.33",
+        "common-tags": "^1.8.2",
         "esbuild": "^0.14.39",
         "esno": "^0.15.0",
         "git-branch-is": "^4.0.0",
         "husky": "^8.0.1",
+        "json5": "^2.2.1",
         "prettier": "^2.6.2",
         "typescript": "^4.8.0-dev.20220514"
     }

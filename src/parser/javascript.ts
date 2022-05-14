@@ -1,9 +1,10 @@
 import fs from "fs/promises";
 import { Parser } from "i18next-scanner";
-import type { ITranslations } from "./types";
+import type { ITranslations } from "../types";
 
 export async function javascriptParser(
     files: string[] = [],
+    options: Record<string, any> = {},
 ): Promise<ITranslations> {
     if (!files.length) return {};
 
@@ -12,18 +13,18 @@ export async function javascriptParser(
         removeUnusedKeys: false,
         sort: true,
         func: {
-            list: ["gettext"],
-            extensions: [".js", ".jsx", ".ts", ".tsx"],
+            list: options?.func ?? ["gettext"],
+            extensions: options?.extensions ?? [".js", ".jsx", ".ts", ".tsx"],
         },
-        defaultValue: "",
+        defaultValue: options?.defaultValue ?? "",
         nsSeparator: false,
         keySeparator: false,
         pluralSeparator: false,
         contextSeparator: false,
         contextDefaultValues: [],
         interpolation: {
-            prefix: "{{",
-            suffix: "}}",
+            prefix: options?.prefix ?? "{{",
+            suffix: options?.suffix ?? "}}",
         },
     });
 
