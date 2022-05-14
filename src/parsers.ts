@@ -1,7 +1,8 @@
-const { handlebarsParser } = require("./handlebars.parser");
-const { javascriptParser } = require("./javascript.parser");
+import { handlebarsParser } from "./handlebars-parser";
+import { javascriptParser } from "./javascript-parser";
+import { ITranslations } from "./types";
 
-function chooseParser(files = []) {
+export function chooseParser(files: string[] = []): Record<string, string[]> {
     return files.reduce(
         (prev, file) => {
             if (/\.(handlebars|hbs)$/.test(file)) {
@@ -18,24 +19,24 @@ function chooseParser(files = []) {
     );
 }
 
-async function parse(files) {
+export async function parse(files: string[]): Promise<ITranslations> {
     const { handlebars, javascript } = chooseParser(files);
     const results = await Promise.allSettled([
         await handlebarsParser(handlebars),
         await javascriptParser(javascript),
     ]);
 
-    const [_handlebars, _javascript] = results.map((result) => result?.value);
+    const translationsFromParsers = results.map((result) => {
+        if (result.status === "rejected") {
+            throw result.reason;
+        }
 
-    const translations = {
-        ..._handlebars,
-        ..._javascript,
-    };
+        return result.value;
+    });
+
+    const translations = translationsFromParsers
+        //  join the translations from the parsers
+        .reduce((prev, curr) => ({ ...prev, ...curr }), {});
 
     return translations;
 }
-
-module.exports = {
-    chooseParser,
-    parse,
-};

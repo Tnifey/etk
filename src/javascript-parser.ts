@@ -1,8 +1,11 @@
-const fs = require("fs/promises");
-const { Parser } = require("i18next-scanner");
+import fs from "fs/promises";
+import { Parser } from "i18next-scanner";
+import type { ITranslations } from "./types";
 
-async function javascriptParser(files = []) {
-    if (!files.length) return { javascript: {} };
+export async function javascriptParser(
+    files: string[] = [],
+): Promise<ITranslations> {
+    if (!files.length) return {};
 
     const parser = new Parser({
         debug: false,
@@ -38,9 +41,5 @@ async function javascriptParser(files = []) {
         `${Object.keys(translations).length} entries`,
     );
 
-    return translations;
+    return translations as ITranslations;
 }
-
-module.exports = {
-    javascriptParser,
-};

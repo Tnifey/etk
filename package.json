@@ -9,11 +9,12 @@
     },
     "readme": "README.md",
     "scripts": {
-        "extract-translations": "node extract -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
+        "dev": "esno src/bin/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
+        "start": "esno src/bin/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
         "prepare": "husky install",
         "format": "prettier --write \"src/**/*\"",
         "lint:prettier": "prettier --check --ignore-unknown --write",
-        "build": "npx esbuild src/bin/cli.js --bundle --outdir=dist --minify --minify-whitespace --target=node16 --platform=node"
+        "build": "npx esbuild ./src/bin/cli.js --bundle --outdir=build --minify --minify-whitespace --target=node16 --platform=node"
     },
     "main": "./dist/cli.js",
     "bin": {
@@ -32,6 +33,7 @@
         "esno": "^0.15.0",
         "git-branch-is": "^4.0.0",
         "husky": "^8.0.1",
-        "prettier": "^2.6.2"
+        "prettier": "^2.6.2",
+        "typescript": "^4.8.0-dev.20220514"
     }
 }

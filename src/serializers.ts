@@ -1,19 +1,23 @@
-const gettextParser = require("gettext-parser");
+import gettextParser from "gettext-parser";
+import type { ITranslations } from "./types";
 
 /**
  * JSON Serializer
  */
-function jsonSerialize(translations, minify = false) {
+export async function jsonSerialize(
+    translations: ITranslations,
+    minify = false,
+): Promise<string> {
     return JSON.stringify(translations, null, minify ? null : 2);
 }
 
 /**
  * Python Serializer
  */
-function pySerialize(
-    translations,
+export async function pySerialize(
+    translations: ITranslations,
     pragma = `from django.utils.translation import gettext_lazy as _\n\n`,
-) {
+): Promise<string> {
     let output = `${pragma}\n`;
 
     const entries = Object.entries(translations);
@@ -28,7 +32,9 @@ function pySerialize(
 /**
  * PO Serializer
  */
-function poSerialize(translations) {
+export async function poSerialize(
+    translations: ITranslations,
+): Promise<string> {
     function poentry([msgid, msgstr]) {
         return [msgid, { msgid: msgid, msgstr: msgstr }];
     }
@@ -62,7 +68,13 @@ function poSerialize(translations) {
     return gettextParser.po.compile(output);
 }
 
-async function serialize(type, content) {
+/**
+ * Serialize as given type format
+ */
+export async function serialize(
+    type: string,
+    content: ITranslations,
+): Promise<string> {
     switch (type) {
         case "po":
             return poSerialize(content);
@@ -74,10 +86,3 @@ async function serialize(type, content) {
             return jsonSerialize(content);
     }
 }
-
-module.exports = {
-    serialize,
-    poSerialize,
-    pySerialize,
-    jsonSerialize,
-};

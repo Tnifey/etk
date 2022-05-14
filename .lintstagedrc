@@ -1,3 +1,4 @@
 {
-    "*.js": "npm run lint:prettier"
+    "*.js": "npm run lint:prettier",
+    "*.ts": "npm run lint:prettier"
 }
