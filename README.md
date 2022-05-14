@@ -9,6 +9,18 @@ if i have no parser for the extension, it will be `json`.
 can output multiple files, pass multiple -o arguments.
 `-o output-file.json -o output-file.po`
 
+### Installation
+
+add this repo to package.json 
+```
+{
+    "devDependencies": {
+        "etk": "github:Tnifey/etk#main"
+    }
+}
+```
+and run `yarn` to install this dependency
+
 ### Usage
 
 run as command:
