@@ -14,7 +14,7 @@
         "prepare": "husky install",
         "format": "prettier --write \"src/**/*\"",
         "lint:prettier": "prettier --check --ignore-unknown --write",
-        "build": "npx esbuild ./src/bin/cli.js --bundle --outdir=build --minify --minify-whitespace --target=node16 --platform=node"
+        "build": "npx esbuild ./src/bin/cli.ts --bundle --outdir=build --minify --minify-whitespace --target=node16 --platform=node"
     },
     "main": "./dist/cli.js",
     "bin": {
