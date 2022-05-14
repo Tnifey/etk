@@ -29,8 +29,12 @@ and run `yarn` to install this dependency
 run as command:
 ```sh
 npx etk -o output.json "path-as-glob/**/*.(handlebars|js|ts)"
-npx etk -o output.py "path-as-glob/**/*.(handlebars|js|ts)"
-npx etk -o output.po "path-as-glob/**/*.(handlebars|js|ts)"
+
+# multiple outputs
+npx etk -o output.py -o output.po "path-as-glob/**/*.(handlebars|js|ts)"
+
+# with config file (see example.etkrc file)
+npx etk -c example.etkrc
 ```
 
 in package.json as script:

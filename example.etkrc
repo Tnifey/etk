@@ -33,19 +33,20 @@
     },
     serializers: {
         json: {
-            empty: false,
+            withEmpty: false,
             minify: false,
             spaces: 4,
         },
         py: {
-            empty: false,
+            withEmpty: false,
             header: "from django.utils.translation import gettext_lazy as _\n\n",
             prefix: "_(",
             suffix: ")\n\n",
         },
         po: {
-            namespace: "frontend",
-            context: "frontend",
+            withEmpty: false,
+            namespace: "",
+            context: "",
             charset: "utf8",
             header: {
                 "content-type": "text/plain; charset=utf8",
