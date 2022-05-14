@@ -2,6 +2,14 @@
     "name": "etk",
     "version": "0.1.2",
     "description": "Extract translation keys in form of key-value pairs from files: js, handlebars",
+    "homepage": "https://github.com/Tnifey/etk",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Tnifey/etk"
+    },
+    "bugs": {
+        "url": "https://github.com/Tnifey/etk/issues"
+    },
     "license": "MIT",
     "author": {
         "name": "tnifey",

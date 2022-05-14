@@ -1,3 +1,5 @@
+# etk
+
 Extract translation keys from handlebars, javascript or typescript into key:value pairs, po, or py gettext.
 Can extract from: .js .jsx .ts. .tsx .handlebars .hbs
 
@@ -16,7 +18,7 @@ add this repo to package.json
 {
     "devDependencies": {
         "etk": "github:Tnifey/etk#main",  // latest
-        "etk": "github:Tnifey/etk#v0.1.1" // tag version (production ready)
+        "etk": "github:Tnifey/etk#v0.1.2" // tag version (production ready)
     }
 }
 ```
