@@ -1,4 +1,4 @@
-Extract gettext translations from files.
+Extract translation keys from handlebars, javascript or typescript into key:value pairs, po, or py gettext.
 Can extract from: .js .jsx .ts. .tsx .handlebars .hbs
 
 output types can be: .json .py .po
@@ -13,19 +13,19 @@ can output multiple files, pass multiple -o arguments.
 
 run as command:
 ```sh
-node extract.js -o output.json path-as-glob/**/*.(handlebars|js|ts)
-node extract.js path-as-glob/**/*.(handlebars|js|ts)
-node extract.js path/to/file.js path/to/file.handlebars
+npx etk -o output.json path-as-glob/**/*.(handlebars|js|ts)
+npx etk path-as-glob/**/*.(handlebars|js|ts)
+npx etk path/to/file.js path/to/file.handlebars
 ```
 
 in package.json as script:
 ```json
 {
     "scripts": {
-        "trans": "node extract -o .translations.json \"src/**/*.(js|ts|handlebars)\"",
-        "trans:py": "node extract -o .translations.py \"src/**/*.(js|ts|handlebars)\"",
-        "trans:po": "node extract -o .translations.po \"src/**/*.(js|ts|handlebars)\"",
-        "trans:ext": "node extract -o .translations.po -o .translations.json \"src/**/*.(js|ts|handlebars)\"",
+        "trans": "npx etk -o .translations.json \"src/**/*.(js|ts|handlebars)\"",
+        "trans:py": "npx etk -o .translations.py \"src/**/*.(js|ts|handlebars)\"",
+        "trans:po": "npx etk -o .translations.po \"src/**/*.(js|ts|handlebars)\"",
+        "trans:ext": "npx etk -o .translations.po -o .translations.json \"src/**/*.(js|ts|handlebars)\"",
     }
 }
 ```
