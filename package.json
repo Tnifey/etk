@@ -1,4 +1,13 @@
 {
+    "name": "etk",
+    "version": "0.1.0",
+    "description": "Extract translation keys in form of key-value pairs from files: js, handlebars",
+    "license": "MIT",
+    "author": {
+        "name": "tnifey",
+        "email": "tnifey@gmail.com"
+    },
+    "readme": "README.md",
     "scripts": {
         "extract-translations": "node extract -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\""
     },
