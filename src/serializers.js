@@ -1,4 +1,4 @@
-const gettextParser = require('gettext-parser');
+const gettextParser = require("gettext-parser");
 
 /**
  * JSON Serializer
@@ -40,18 +40,18 @@ function poSerialize(translations) {
     }
 
     let output = {
-        charset: 'utf-8',
+        charset: "utf-8",
         headers: {
-            'content-type': 'text/plain; charset=utf-8',
-            'plural-forms': 'nplurals=2; plural=(n!=1);',
+            "content-type": "text/plain; charset=utf-8",
+            "plural-forms": "nplurals=2; plural=(n!=1);",
         },
         translations: {
-            '': {
-                '': {
-                    msgid: '',
+            "": {
+                "": {
+                    msgid: "",
                     msgstr: [
-                        'Content-Type: text/plain; charset=utf-8\n',
-                        'Plural-Forms: nplurals=2; plural=(n!=1);\n\n',
+                        "Content-Type: text/plain; charset=utf-8\n",
+                        "Plural-Forms: nplurals=2; plural=(n!=1);\n\n",
                     ],
                 },
                 ...povalues(translations),
@@ -64,10 +64,10 @@ function poSerialize(translations) {
 
 async function serialize(type, content) {
     switch (type) {
-        case 'po':
+        case "po":
             return poSerialize(content);
 
-        case 'py':
+        case "py":
             return pySerialize(content);
 
         default:

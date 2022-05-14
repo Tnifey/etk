@@ -1,6 +1,6 @@
 // https://www.npmjs.com/package/fast-glob
-const glob = require('fast-glob');
-const path = require('path');
+const glob = require("fast-glob");
+const path = require("path");
 
 function getFilePaths(argv) {
     const files = argv._ || [];
@@ -13,12 +13,12 @@ function getFilePaths(argv) {
 }
 
 function ensureString(str) {
-    return str && typeof str === 'string' ? str : '';
+    return str && typeof str === "string" ? str : "";
 }
 
 function toArray(input) {
-    if(typeof input === 'string') return [input];
-    if(Array.isArray(input)) return input;
+    if (typeof input === "string") return [input];
+    if (Array.isArray(input)) return input;
     return [];
 }
 

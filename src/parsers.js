@@ -1,5 +1,5 @@
-const { handlebarsParser } = require( './handlebars.parser');
-const { javascriptParser } = require( './javascript.parser');
+const { handlebarsParser } = require("./handlebars.parser");
+const { javascriptParser } = require("./javascript.parser");
 
 function chooseParser(files = []) {
     return files.reduce(
@@ -25,10 +25,7 @@ async function parse(files) {
         await javascriptParser(javascript),
     ]);
 
-    const [
-        _handlebars,
-        _javascript
-    ] = results.map((result) => result?.value);
+    const [_handlebars, _javascript] = results.map((result) => result?.value);
 
     const translations = {
         ..._handlebars,
@@ -41,4 +38,4 @@ async function parse(files) {
 module.exports = {
     chooseParser,
     parse,
-}
+};

@@ -9,20 +9,25 @@
     },
     "readme": "README.md",
     "scripts": {
-        "extract-translations": "node extract -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\""
+        "extract-translations": "node extract -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
+        "prepare": "husky install",
+        "format": "prettier --write \"src/**/*\"",
+        "lint:prettier": "prettier --check --ignore-unknown --write"
     },
-    "main": "extract.js",
+    "main": "./src/index.js",
     "bin": {
-        "etk": "./extract.js"
+        "etk": "./src/bin/extract.js"
     },
     "dependencies": {
         "fast-glob": "^3.2.11",
+        "gettext-parser": "^5.1.2",
         "i18next-scanner": "^3.1.0",
         "minimist": "^1.2.6",
-        "gettext-parser": "^5.1.2",
         "xgettext-template": "^4.1.1"
     },
     "devDependencies": {
-        "@types/node": "^17.0.33"
+        "@types/node": "^17.0.33",
+        "husky": "^8.0.1",
+        "prettier": "^2.6.2"
     }
 }
