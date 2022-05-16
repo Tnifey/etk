@@ -10,6 +10,8 @@ npx lint-staged
 # check if is main branch
 DEPLOY_BRANCH=(npx git-branch-is -r "^(main|dev)$")
 
+echo $DEPLOY_BRANCH
+
 if [ $DEPLOY_BRANCH != 1 ]; then
   echo "Prepare build"
   yarn build
@@ -19,6 +21,5 @@ if [ $DEPLOY_BRANCH != 1 ]; then
 
   echo "Commit changes"
   git add dist/cli.js
-
   exit 0
 fi
