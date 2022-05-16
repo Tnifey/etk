@@ -3,4 +3,13 @@
 
 echo "Pre-merge-commit hook"
 
-(npx git-branch-is -r "^(main|dev)$" && yarn run build && cp ./build/cli.js dist/cli.js && git add dist/cli.js && git commit --amend && git push) || true
+DEPLOY_BRANCH=(npx git-branch-is -r "^(main|dev)$")
+
+if [ $DEPLOY_BRANCH == '' ]; then
+  yarn build
+  cp ./build/cli.js dist/cli.js
+  git add dist/cli.js
+  git commit --amend
+  git push
+  exit 0
+fi

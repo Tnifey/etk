@@ -6,3 +6,15 @@ echo "Pre-commit hook"
 git checkout HEAD -- ./dist/cli.js
 
 npx lint-staged
+
+# check if is main branch
+DEPLOY_BRANCH=(npx git-branch-is -r "^(main|dev)$")
+
+if [ $DEPLOY_BRANCH == '' ]; then
+  yarn build
+  cp ./build/cli.js dist/cli.js
+  git add dist/cli.js
+  git commit --amend
+  git push
+  exit 0
+fi
