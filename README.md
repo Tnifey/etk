@@ -17,7 +17,7 @@ add this repo to package.json
 ```
 {
     "devDependencies": {
-        "etk": "github:Tnifey/etk#main",  // latest
+        "etk": "github:Tnifey/etk#main",  // latest (not stable)
         "etk": "github:Tnifey/etk#v0.1.4" // tag version (production ready)
     }
 }
