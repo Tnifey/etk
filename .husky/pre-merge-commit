@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+(npx git-branch-is -r "^(main|dev)$" && yarn run build && cp ./build/cli.js dist/cli.js && git add dist/cli.js && git commit --amend && git push) || true

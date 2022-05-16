@@ -4,5 +4,3 @@
 git checkout HEAD -- ./dist/cli.js
 
 npx lint-staged
-
-(npx git-branch-is --not -r "^feat/" && yarn run build && cp ./build/cli.js dist/cli.js && git add dist/cli.js && git commit -m "built cli.js" --no-verify && git pull) || true
