@@ -203,3 +203,5 @@ resources/
 !.gitkeep
 
 build/
+
+.vscode/

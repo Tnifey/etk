@@ -16,7 +16,7 @@ export async function handlebarsParser(
 
     const entries = [...Object.entries(translationList)];
     const object = entries
-        .map(([_k, v]) => !!v?.msgid && [v?.msgid, v?.msgstr])
+        .map(([_k, v]) => !!v?.msgid && [v?.msgid, ""])
         .filter(Boolean);
 
     const translations = Object.fromEntries(object);
