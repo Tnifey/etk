@@ -16,6 +16,7 @@ export async function javascriptParser(
             list: options?.func ?? ["gettext"],
             extensions: options?.extensions ?? [".js", ".jsx", ".ts", ".tsx"],
         },
+        trans: false,
         defaultValue: options?.defaultValue ?? "",
         nsSeparator: false,
         keySeparator: false,

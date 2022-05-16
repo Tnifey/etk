@@ -1,7 +1,7 @@
 # etk
 
 Extract translation keys from handlebars, javascript or typescript into key:value pairs, po, or py gettext.
-Can extract from: .js .jsx .ts. .tsx .handlebars .hbs
+Can extract from: .js .jsx .ts. .tsx .handlebars .hbs, .njk, .nunjukcs
 
 output types can be: .json .py .po
 
@@ -17,8 +17,8 @@ add this repo to package.json
 ```
 {
     "devDependencies": {
-        "etk": "github:Tnifey/etk#main",  // latest
-        "etk": "github:Tnifey/etk#v0.1.3" // tag version (production ready)
+        "etk": "github:Tnifey/etk#main",  // latest (not stable)
+        "etk": "github:Tnifey/etk#v0.1.4" // tag version (production ready)
     }
 }
 ```
@@ -30,7 +30,7 @@ and run `yarn` to install this dependency
 
 run as command:
 ```sh
-npx etk -o output.json "path-as-glob/**/*.(handlebars|js|ts)"
+npx etk -o output.json "path-as-glob/**/*.(handlebars|hbs|js|ts|nunjucks|njk)"
 
 # multiple outputs
 npx etk -o output.py -o output.po "path-as-glob/**/*.(handlebars|js|ts)"
@@ -43,12 +43,27 @@ in package.json as script:
 ```json
 {
     "scripts": {
-        "trans": "npx etk -o .translations.json \"src/**/*.(js|ts|handlebars)\"",
+        "trans": "npx etk -o .translations.json \"src/**/*.(handlebars|hbs|js|ts|nunjucks|njk)\"",
         "trans:py": "npx etk -o .translations.py \"src/**/*.(js|ts|handlebars)\"",
         "trans:po": "npx etk -o .translations.po \"src/**/*.(js|ts|handlebars)\"",
         "trans:ext": "npx etk -o .translations.po -o .translations.json \"src/**/*.(js|ts|handlebars)\"",
     }
 }
+```
+
+### Defaults
+It search for this:
+
+```javascript
+gettext("translation key") // <- gettext function with string parameter
+```
+
+```handlebars
+{{_ "translation key" }}  <!-- _ helper with string parameter >
+```
+
+```handlebars
+{{ _("translation key") }} {# <- function with string parameter  #}
 ```
 
 ### Internally using:

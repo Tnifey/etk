@@ -24,8 +24,10 @@ let config = {
     output: getFilePaths(argv.o, { noGlob: true }),
     parsers: {
         handlebars: {
-            parser: "handlebars",
             extensions: ["handlebars", "hbs"],
+        },
+        nunjucks: {
+            extensions: ["nunjucks", "njk"],
         },
         javascript: {
             parser: "javascript",

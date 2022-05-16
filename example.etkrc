@@ -1,6 +1,6 @@
 {
     // glob as input
-    input: "test/**/*.(js|ts|handlebars)",
+    input: "test/**/*.(js|ts|handlebars|hbs|njk|nunjucks)",
     // output files
     output: [
         ".translations.json",
@@ -15,6 +15,13 @@
             extensions: [
                 "handlebars",
                 "hbs"
+            ]
+        },
+        nunjucks: {
+            // extensions to parse with nunjucks parser
+            extensions: [
+                "nunjucks",
+                "njk"
             ]
         },
         javascript: {

@@ -1,7 +1,7 @@
 {
     "name": "etk",
-    "version": "0.1.3",
-    "description": "Extract translation keys in form of key-value pairs from files: js, handlebars",
+    "version": "0.1.4",
+    "description": "Extract translation keys in form of key-value pairs from files: js, handlebars, nunjucks",
     "homepage": "https://github.com/Tnifey/etk",
     "repository": {
         "type": "git",

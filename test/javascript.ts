@@ -1,5 +1,8 @@
-function gettext(...args) { return gettext }
-function pgettext(...args) { return pgettext }
+function gettext(...args) { return gettext; }
+function pgettext(...args) { return pgettext; }
+
+gettext(`<div>{{_ "handlebars hello world"}}</div>`);
+gettext(`<div>{{_ 'handlebars It is <a href="#here"></a>. Check it out!'}}</div>`);
 
 gettext("function");
 pgettext("plural function");
