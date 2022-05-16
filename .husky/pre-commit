@@ -11,8 +11,13 @@ npx lint-staged
 DEPLOY_BRANCH=(npx git-branch-is -r "^(main|dev)$")
 
 if [ $DEPLOY_BRANCH == '' ]; then
+  echo "Prepare build"
   yarn build
+
+  echo "Move build to dist"
   cp ./build/cli.js dist/cli.js
+
+  echo "Commit changes"
   git add dist/cli.js
   git commit --amend
   git push
