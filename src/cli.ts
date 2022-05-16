@@ -8,12 +8,19 @@ import { extract, ExtractResult } from "./extract";
 import { stripIndents } from "common-tags";
 import JSON5 from "json5";
 import { helpMessage } from "./messages";
+import packagejson from "../package.json";
 
-console.log(`etk -- extract translations keys\n\n`);
+console.log(`etk -- extract translations keys\n`);
 
 let argv = minimist(process.argv.slice(2));
 
+if (argv.version || argv.v) {
+    console.log(`version v${packagejson.version}\n`);
+    process.exit(0);
+}
+
 if (argv.help || argv.h) {
+    console.log();
     console.log(helpMessage);
     process.exit(0);
 }

@@ -17,6 +17,7 @@
     },
     "readme": "README.md",
     "scripts": {
+        "etk": "esno src/cli.ts",
         "dev": "esno src/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
         "dev:config": "esno src/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
         "start": "esno src/cli.ts -o .translations.py -o .translations.json -o .translations.po \"resources/**/*.(js|ts|handlebars)\"",
