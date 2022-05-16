@@ -13,9 +13,10 @@ export async function handlebarsParser(
 
     const po = await handlebarsExtractor(filepaths, options);
     const translationList = po?.translations?.[""] || {};
+
     const entries = [...Object.entries(translationList)];
     const object = entries
-        .map(([_k, v]) => !v?.msgid && [v?.msgid, ""])
+        .map(([_k, v]) => !!v?.msgid && [v?.msgid, v?.msgstr])
         .filter(Boolean);
 
     const translations = Object.fromEntries(object);

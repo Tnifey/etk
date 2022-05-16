@@ -7,27 +7,14 @@ import { getFilePaths } from "./utils";
 import { extract, ExtractResult } from "./extract";
 import { stripIndents } from "common-tags";
 import JSON5 from "json5";
+import { helpMessage } from "./messages";
 
 console.log(`etk -- extract translations keys\n\n`);
 
 let argv = minimist(process.argv.slice(2));
 
 if (argv.help || argv.h) {
-    const message = `
-Usage:
-  $ etk [options] [files-to-extract]
-
-Example:
-  $ etk -o translations.json "resources/**/*.js"
-  $ etk -o translations.json -o translations.py -o translations.po "resources/**/*.(js|handlebars)"
-
-Options:
-  -o <path>            Output file path. Can be specified multiple times.
-  --help, -h           Show this help.
-  --silent true        Do not print anything to the console.
-  -c <path>            Path to the config file.
-  `;
-    console.log(message);
+    console.log(helpMessage);
     process.exit(0);
 }
 
@@ -40,15 +27,10 @@ let config = {
             parser: "handlebars",
             extensions: ["handlebars", "hbs"],
         },
-        nunjucks: {
-            parser: "handlebars",
-            extensions: ["nunjucks", "njk"],
-        },
         javascript: {
             parser: "javascript",
             extensions: ["js", "ts", "jsx", "tsx"],
             func: ["gettext"],
-            plural: "p",
         },
     },
 };

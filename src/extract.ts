@@ -28,7 +28,9 @@ export async function extract(config): Promise<ExtractResult> {
             config?.serializers,
         );
 
-        console.log("Writing translation keys to file:", output);
+        console.log(
+            `Writing translation keys to file "${output}" using "${type}" serializer.`,
+        );
         await fs.writeFile(output, content);
     }
 
