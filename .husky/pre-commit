@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "Pre-commit hook"
+
 git checkout HEAD -- ./dist/cli.js
 
 npx lint-staged
